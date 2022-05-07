@@ -34,7 +34,7 @@ public class Photo {
     @Column(name = "url")
     private String url;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne(cascade = {CascadeType.REFRESH})
     @JoinColumn(name = "album_id")
     @JsonIgnore
     private Album album;

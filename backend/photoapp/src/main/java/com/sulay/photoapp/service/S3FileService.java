@@ -1,6 +1,7 @@
 package com.sulay.photoapp.service;
 
 import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.AmazonS3URI;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.sulay.photoapp.Dto.AlbumDto;
@@ -34,7 +35,7 @@ public class S3FileService {
         fileMetadata.setContentType(photoFile.getContentType());
         try {
             s3Client.putObject(BUCKET_NAME, fileKey, photoFile.getInputStream(), fileMetadata);
-        } catch(IOException e) {
+        } catch (IOException e) {
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
         }
         s3Client.setObjectAcl(BUCKET_NAME, fileKey, CannedAccessControlList.PublicRead);
@@ -42,15 +43,10 @@ public class S3FileService {
         return s3Client.getResourceUrl(BUCKET_NAME, fileKey);
     }
 
-    public boolean deleteFile(PhotoDto photoDto) {
-        try {
-            URL url = new URL(photoDto.getUrl());
-            String photoKey = url.getRef();
-            System.out.println("Photo Key: " + photoKey);
-            return true;
-        } catch (MalformedURLException e) {
-            throw new PhotoAppException("Photo file doesn't exist");
-        }
-    }
+    public boolean deleteByUrl(String thumbnailUrl) {
+        AmazonS3URI awsUri = new AmazonS3URI(thumbnailUrl);
+        s3Client.deleteObject(awsUri.getBucket(), awsUri.getKey());
 
+        return true;
+    }
 }

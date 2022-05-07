@@ -9,7 +9,5 @@ import java.util.List;
 @Data
 public class PhotoDto {
     private int id;
-    private String name;
-    private String description;
     private String url;
 }

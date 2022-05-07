@@ -1,5 +1,6 @@
 package com.sulay.photoapp.repository;
 
+import com.sulay.photoapp.Dto.AlbumDto;
 import com.sulay.photoapp.entity.Comment;
 import com.sulay.photoapp.entity.Photo;
 import org.springframework.data.jpa.repository.JpaRepository;
