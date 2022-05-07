@@ -1,0 +1,4 @@
+<mat-form-field>
+    <input color="accent" type="tel" matInput placeholder="Search" id="keyword" name="keyword" #keyword (keyup.enter)="handleSearch(keyword.value)">
+</mat-form-field>
+    <button color="accent" mat-icon-button (click)="handleSearch(keyword.value)"><mat-icon>search</mat-icon></button> 

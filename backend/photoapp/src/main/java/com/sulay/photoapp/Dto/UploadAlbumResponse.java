@@ -1,0 +1,13 @@
+package com.sulay.photoapp.Dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class UploadAlbumResponse {
+    private int albumId;
+    private String albumThumbnailUrl;
+}

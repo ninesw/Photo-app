@@ -1,0 +1,31 @@
+<h1 mat-dialog-title>Add Album</h1>
+<div mat-dialog-content style="display: inline-block;">
+  <p>Enter updated details</p>
+        <input required matInput [(ngModel)]="data.id" disabled="true" hidden="true">
+    <mat-form-field appearance="fill">
+        <mat-label>Name</mat-label>
+        <input required matInput [(ngModel)]="data.name">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Description</mat-label>
+        <input matInput required [(ngModel)]="data.description">
+    </mat-form-field>
+    <mat-form-field class="columns">
+        <mat-label *ngIf="selectedFiles; else newFile">{{selectedFiles.item(0).name}}</mat-label>
+        <ng-template #newFile>
+            <mat-label>Choose file</mat-label>
+        </ng-template>
+        <input matInput disabled>
+        <button mat-icon-button matSuffix (click)="fileInput.click()">
+            <mat-icon>attach_file</mat-icon>
+        </button>
+        <input required hidden (change)="upload($event)" #fileInput type="file" id="file">
+    </mat-form-field>
+
+    <input matInput [(ngModel)]="data.thumbnailUrl" hidden="true">
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button (click)="addAlbum(data.name, data.description)" [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
+
+</div>

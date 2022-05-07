@@ -1,0 +1,23 @@
+<p>Showing information for photo with id {{ currentPhoto.id }}</p>
+
+<img height="500" src="{{ currentPhoto.url }}" alt="{{ currentPhoto.url }}">
+
+<h2>Comments</h2>
+<ng-form>
+    <mat-form-field class="add-comment-form-field" appearance="fill">
+        <input matInput name="message" type="text" [(ngModel)]="value.message">
+    </mat-form-field>
+        <input name="id" type="text" [(ngModel)]="value.id" hidden="true"/>
+</ng-form>
+
+
+<div class="content">
+    <mat-list>
+        <mat-list-item *ngFor="let comment of comments">
+        <p matLine>
+            {{ comment.message }}
+            <button (click)="handleDeleteComment(comment.id)" mat-icon-button><mat-icon color="warn">delete</mat-icon></button>
+        </p>
+        </mat-list-item>
+    </mat-list>
+</div>

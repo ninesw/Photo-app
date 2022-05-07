@@ -1,0 +1,49 @@
+
+<div class="content">
+    <mat-toolbar color="primary">
+        <mat-label>All Albums</mat-label>
+            <span class="spacer"></span>
+            <span class="spacer"></span>
+            <app-search></app-search>
+    </mat-toolbar>
+    <button color="accent" mat-fab (click)="handleAddAlbum()"><mat-icon>add</mat-icon></button>
+    <div class="row wrap" style="margin-top: 1cm;">
+        <div *ngIf="albums.length == 0">           
+            <h1>No albums found</h1>
+        </div>
+        <div fxLayout="row wrap" fxLayoutGap="32px grid">
+            <div fxFlex="25%" *ngFor="let album of albums">
+            <mat-card class="mat-elevation-z1" >
+            <mat-card-header>
+                <mat-card-title>{{ album.name }}</mat-card-title>
+                <mat-card-subtitle>{{ album.description }}</mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image width="250" height="300" src="{{ album.thumbnailUrl }}">
+
+            <mat-card-actions>
+                <button routerLink="/albums/{{ album.id }}" color="primary" mat-flat-button>Photos</button>
+
+                <button [matMenuTriggerFor]="albumMenu" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+                    <mat-icon color="accent">more_vert</mat-icon>
+                </button>
+
+                <mat-menu #albumMenu="matMenu">
+                    <button mat-menu-item (click)="handleDelete(album.id)">
+                        <mat-icon color="warn">delete</mat-icon>
+                        <span>Delete</span>
+                    </button>
+                    <button mat-menu-item (click)="handleEdit(album.id)">
+                        <mat-icon color="accent">edit</mat-icon>
+                        <span>Edit</span>
+                    </button>
+                </mat-menu>
+
+            </mat-card-actions>
+            </mat-card>
+            </div>
+        </div>
+    </div>
+    
+
+</div>
+    

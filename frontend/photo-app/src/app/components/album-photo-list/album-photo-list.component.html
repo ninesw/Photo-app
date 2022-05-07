@@ -1,0 +1,42 @@
+<div class="content">
+    <mat-toolbar color="primary">
+        <mat-label>All Photos</mat-label>
+            <span class="spacer"></span>
+            <span class="spacer"></span>
+    </mat-toolbar>
+
+    <app-upload-photo></app-upload-photo>
+    
+    <div class="row wrap" style="margin-top: 1cm;">
+        <div *ngIf="albumPhotos.length == 0">           
+            <h1>No photos found</h1>
+        </div>
+        <div fxLayout="row wrap" fxLayoutGap="32px grid">
+            <div fxFlex="25%" *ngFor="let photo of albumPhotos">
+            <mat-card class="mat-elevation-z1" >
+            <mat-card-header>
+            </mat-card-header>
+            <img mat-card-image width="250" height="300" src="{{ photo.url }}">
+
+            <mat-card-actions>
+                <button [matMenuTriggerFor]="photoMenu" mat-icon-button aria-label="Example icon button with a vertical three dot icon">
+                    <mat-icon color="accent">more_vert</mat-icon>
+                </button>
+                <button routerLink="/photos/{{ photo.id }}" mat-icon-button aria-label="Example icon button with a heart icon">
+                    <mat-icon color="accent">aspect_ratio</mat-icon>
+                </button>
+                <mat-menu #photoMenu="matMenu">
+                    <button (click)="handleDelete(photo.id)" mat-menu-item>
+                        <mat-icon color="warn">delete</mat-icon>
+                        <span>Delete</span>
+                    </button>
+                </mat-menu>
+
+            </mat-card-actions>
+            </mat-card>
+            </div>
+        </div>
+    </div>
+    
+
+</div>

@@ -1,0 +1,17 @@
+.example-card {
+    max-width: 400px;
+}
+
+.content {
+    padding: 35px;
+}
+
+.content > mat-card {
+    width: 200px;
+}
+
+.row-wrap {
+    display: flex;
+    flex-flow: row wrap;
+}
+
